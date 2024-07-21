@@ -1,8 +1,8 @@
 import tkinter as tk
-import psutil
 import time
 
 start_time = time.time()
+start_time_str = time.strftime("%d-%m-%Y %H:%M:%S", time.localtime(start_time))
 
 class UptimeApp:
     def __init__(self, root):
@@ -21,6 +21,10 @@ class UptimeApp:
         self.canvas = tk.Canvas(self.frame, height=2, bg="black")
         self.canvas.pack(fill='x', pady=(5, 20))
 
+        # Label pour afficher la date et heure du démarrage
+        self.start_time_label = tk.Label(self.frame, text=f"Démarré le : {start_time_str}", font=("Helvetica", 10))
+        self.start_time_label.pack(pady=(5, 5), anchor='center')
+
         # Label pour afficher le nombre de jours (initialement caché)
         self.days_label = tk.Label(self.frame, text="", font=("Helvetica", 36))
         self.days_label.pack(pady=(5, 5), anchor='center')
@@ -32,7 +36,7 @@ class UptimeApp:
         self.update_uptime()
 
     def update_uptime(self):
-        # Obtenir le temps de démarrage du système
+        # Calculer le temps écoulé depuis le démarrage du programme
         current_time = time.time()
         uptime_duration = current_time - start_time
         
