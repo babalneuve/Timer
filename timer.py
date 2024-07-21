@@ -2,6 +2,8 @@ import tkinter as tk
 import psutil
 import time
 
+start_time = time.time()
+
 class UptimeApp:
     def __init__(self, root):
         self.root = root
@@ -31,9 +33,8 @@ class UptimeApp:
 
     def update_uptime(self):
         # Obtenir le temps de démarrage du système
-        uptime_seconds = psutil.boot_time()
         current_time = time.time()
-        uptime_duration = current_time - uptime_seconds
+        uptime_duration = current_time - start_time
         
         # Convertir les secondes en jours, heures, minutes, secondes
         days = int(uptime_duration // (24 * 3600))
